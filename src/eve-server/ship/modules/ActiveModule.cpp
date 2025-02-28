@@ -1097,7 +1097,12 @@ bool ActiveModule::CanActivate() {
             case Tractor_Beam: {
                 /** @todo  add checks for other items vs cap tractors and maybe some items for small tractors */
                 bool allowed(false);
-                if ( m_targetSE->IsWreckSE()) {
+                if (m_moduleTypeID == TYPE_CAPITAL_TRACTOR_BEAM) {
+                    if (target->IsAsteroid()) {
+                        return true;
+                    }
+                }
+                else if ( m_targetSE->IsWreckSE()) {
                     allowed = true;
                 } else if (m_targetSE->IsContainerSE()) {
                     if (m_targetSE->GetContSE()->IsAnchored()) {
